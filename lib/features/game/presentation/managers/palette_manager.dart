@@ -1,0 +1,31 @@
+import 'package:geometry_dash/core/constants/game_palette.dart';
+import 'package:geometry_dash/core/constants/palettes.dart';
+
+class PaletteManager {
+  final int levelsPerPalette;
+
+  const PaletteManager({this.levelsPerPalette = 5});
+
+  GamePalette getPaletteForLevel(int level) {
+    final group = level ~/ levelsPerPalette;
+
+    switch (group) {
+      case 0:
+        return Palettes.classic;
+      case 1:
+        return Palettes.lava;
+      case 2:
+        return Palettes.neon;
+      case 3:
+        return Palettes.ice;
+      case 4:
+        return Palettes.forest;
+      case 5:
+        return Palettes.space;
+      case 6:
+        return Palettes.desert;
+      default:
+        return Palettes.classic;
+    }
+  }
+}
