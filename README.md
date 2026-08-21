@@ -1,4 +1,4 @@
-# geometry_dash
+# Geometry Dash Clone
 
 Small Geometry Dash clone implemented using clean architecture.
 
