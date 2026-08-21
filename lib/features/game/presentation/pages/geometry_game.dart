@@ -56,14 +56,14 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
   late int currentLevel;
 
   static const double playerSize = 30;
-  static double worldSpeedValue = 250;
+  static double worldSpeedValue = 300;
   static const double trailInterval = 0.06;
   static const double groundRatio = 0.85;
   static const double groundThickness = 64;
 
   int speedLevel = 0;
   final List<double> speeds = [
-    250.0,
+    300.0,
     420.0,
     500.0,
   ];
