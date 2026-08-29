@@ -46,7 +46,7 @@ class StatisticsContent extends StatelessWidget {
         const SizedBox(height: 20),
 
         _StatisticCard(
-          title: "NIVEL MAS RAPIDO COMPLETADO", 
+          title: "FASTEST LEVEL COMPLETED", 
           value: "${gameHub.fastestLevelCompleted} - ${gameHub.fastestLevelTime.toStringAsFixed(2)}s", 
           icon: Icons.speed, 
           iconColor: Colors.orangeAccent, 
