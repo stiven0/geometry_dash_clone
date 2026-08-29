@@ -71,7 +71,7 @@ class GameLifecycleManager {
 
     final elapsedSeconds = game.levelTimer.elapsedMilliseconds / 1000.0;
     gameHubNotifier.updateFastestLevelTime(elapsedSeconds);
-    gameHubNotifier.updateFastestLevelCompleted(game.currentLevel + 1);
+    gameHubNotifier.updateFastestLevelCompleted(game.currentLevel + 1, elapsedSeconds);
 
     onLevelCompleted(game.currentLevel + 2);
 

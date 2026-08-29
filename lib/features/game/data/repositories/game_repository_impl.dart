@@ -19,7 +19,7 @@ class GameRepositoryImpl implements GameRepository {
   Future<void> setFastestLevelCompleted(int level) => localDataSource.setFastestLevelCompleted(level);
 
   @override
-  Future<int> getFastestLevelTime() => localDataSource.getFastestLevelTime();
+  Future<double> getFastestLevelTime() => localDataSource.getFastestLevelTime();
 
   @override
   Future<int> getFastestLevelCompleted() => localDataSource.getFastestLevelCompleted();

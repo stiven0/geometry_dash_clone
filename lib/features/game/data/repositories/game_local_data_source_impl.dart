@@ -19,7 +19,7 @@ class GameLocalDataSourceImpl implements GameLocalDataSource {
   Future<void> setFastestLevelCompleted(int level) => storage.setFastestLevelCompleted(level);
 
   @override
-  Future<int> getFastestLevelTime() => storage.getFastestLevelTime();
+  Future<double> getFastestLevelTime() => storage.getFastestLevelTime();
 
   @override
   Future<int> getFastestLevelCompleted() => storage.getFastestLevelCompleted();

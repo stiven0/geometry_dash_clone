@@ -28,8 +28,9 @@ class GameHubNotifier extends StateNotifier<GameHubState> {
     state = state.copyWith(fastestLevelTime: value);
   }
 
-  Future<void> updateFastestLevelCompleted(int value) async {
+  Future<void> updateFastestLevelCompleted(int value, double fastestLevelTime) async {
     if (value == state.fastestLevelCompleted) return;
+    if (state.fastestLevelTime > 0 && fastestLevelTime >= state.fastestLevelTime) return;
     await repository.setFastestLevelCompleted(value);
     state = state.copyWith(fastestLevelCompleted: value);
   }

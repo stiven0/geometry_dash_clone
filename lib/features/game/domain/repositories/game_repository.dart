@@ -5,6 +5,6 @@ abstract class GameRepository {
   Future<void> setFastestLevelTime(double time);
   Future<void> setFastestLevelCompleted(int level);
 
-  Future<int> getFastestLevelTime();
+  Future<double> getFastestLevelTime();
   Future<int> getFastestLevelCompleted();
 }

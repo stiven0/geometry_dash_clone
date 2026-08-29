@@ -4,6 +4,8 @@ class StorageService {
 
   static const String _unlockedLevelKey = 'unlocked_level';
   static const String _diamondsKey = 'diamonds';
+  static const String _fastestLevelTimeKey = 'fastest_level_time';
+  static const String _fastestLevelCompletedKey = 'fastest_level_completed';
 
   Future<int> getUnlockedLevel() async {
     final prefs = await SharedPreferences.getInstance();
@@ -32,22 +34,22 @@ class StorageService {
 
   Future<void> setFastestLevelTime( double time ) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('fastest_level_time', time.toInt());
+    await prefs.setDouble(_fastestLevelTimeKey, time);
   }
 
   Future<void> setFastestLevelCompleted( int level ) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('fastest_level_completed', level);
+    await prefs.setInt(_fastestLevelCompletedKey, level);
   }
 
-  Future<int> getFastestLevelTime() async {
+  Future<double> getFastestLevelTime() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('fastest_level_time') ?? 0;
+    return prefs.getDouble(_fastestLevelTimeKey) ?? 0;
   }
 
   Future<int> getFastestLevelCompleted() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('fastest_level_completed') ?? 0;
+    return prefs.getInt(_fastestLevelCompletedKey) ?? 0;
   }
 
 }

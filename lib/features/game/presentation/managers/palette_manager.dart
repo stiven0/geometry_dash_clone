@@ -24,6 +24,14 @@ class PaletteManager {
         return Palettes.space;
       case 6:
         return Palettes.desert;
+      case 7:
+        return Palettes.lava;
+      case 8:
+        return Palettes.neon;
+      case 9:
+        return Palettes.ice;
+      case 10:
+        return Palettes.forest;
       default:
         return Palettes.classic;
     }

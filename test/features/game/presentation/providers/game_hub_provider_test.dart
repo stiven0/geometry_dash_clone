@@ -19,7 +19,7 @@ class FakeGameRepository implements GameRepository {
   Future<int> getFastestLevelCompleted() async => fastestLevelCompleted;
 
   @override
-  Future<int> getFastestLevelTime() async => fastestLevelTime.toInt();
+  Future<double> getFastestLevelTime() async => fastestLevelTime.toDouble();
 
   @override
   Future<void> setFastestLevelCompleted(int level) async {
@@ -80,7 +80,7 @@ void main() {
     });
 
     test('updateFastestLevelCompleted updates state', () async {
-      await notifier.updateFastestLevelCompleted(3);
+      await notifier.updateFastestLevelCompleted(3, 2.5);
       expect(notifier.state.fastestLevelCompleted, 3);
     });
   });
