@@ -89,11 +89,11 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
   @override
   Future<void> onLoad() async {
 
-    add(
-      FpsTextComponent(
-        position: Vector2(100, 100),
-      )
-    );
+    // add(
+    //   FpsTextComponent(
+    //     position: Vector2(100, 100),
+    //   )
+    // );
 
     await super.onLoad();
 
