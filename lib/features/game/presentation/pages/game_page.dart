@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geometry_dash/features/game/presentation/pages/game_completed_page.dart';
 import 'package:geometry_dash/features/game/presentation/pages/geometry_game.dart';
 import 'package:geometry_dash/features/game/presentation/providers/game_hub_provider.dart';
+import 'package:geometry_dash/features/game/presentation/providers/game_settings_provider.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/game_hub_widget.dart';
 import 'package:geometry_dash/features/menu/presentation/pages/menu_page.dart';
 import 'package:geometry_dash/features/menu/presentation/providers/progress_state_provider.dart';
@@ -31,22 +32,40 @@ class GamePage extends ConsumerStatefulWidget {
 
 class _GamePageState extends ConsumerState<GamePage> {
 
-  late final GeometryGame game;
+  GeometryGame? game;
   late GameState gameState = GameState.playing;
+  bool isGameReady = false;
 
   @override
   void initState() {
     super.initState();
-    game = GeometryGame(
-      initialLevel: widget.selectedLevel,
-      gameHubNotifier: ref.read(gameHubProvider.notifier),
-      progressNotifier: ref.read(progressStateProvider.notifier),
-      onGameCompleted: showGameCompleted,
-      onLevelCompleted: onLevelCompleted,
-    );
+    _initializeGame();
+  }
+
+  Future<void> _initializeGame() async {
+    await ref.read(gameSettingsProvider.notifier).loadSettings();
+
+    if (!mounted) return;
+
+    final settings = ref.read(gameSettingsProvider);
+
+    setState(() {
+      game = GeometryGame(
+        initialLevel: widget.selectedLevel,
+        initialWorldSpeed: settings.playerStartSpeed,
+        gameHubNotifier: ref.read(gameHubProvider.notifier),
+        progressNotifier: ref.read(progressStateProvider.notifier),
+        onGameCompleted: showGameCompleted,
+        onLevelCompleted: onLevelCompleted,
+      );
+      isGameReady = true;
+    });
   }
 
   void onLevelCompleted(int level) {
+    final currentGame = game;
+    if (currentGame == null) return;
+
     setState(() {
       gameState = GameState.levelCompleted;
     });
@@ -63,12 +82,15 @@ class _GamePageState extends ConsumerState<GamePage> {
   }
 
   void togglePause() async {
+    final currentGame = game;
+    if (currentGame == null) return;
+
     setState(() {
       if (gameState == GameState.paused) {
-        game.resumeEngine();
+        currentGame.resumeEngine();
         gameState = GameState.playing;
       } else {
-        game.pauseEngine();
+        currentGame.pauseEngine();
         gameState = GameState.paused;
       }
     });
@@ -95,16 +117,26 @@ class _GamePageState extends ConsumerState<GamePage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentGame = game;
+
+    if (!isGameReady || currentGame == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return SafeArea(
       child: Stack(
         children: [
 
           GameWidget(
-            game: game,
+            game: currentGame,
           ),
 
           GameHubWidget(
-            game: game,
+            game: currentGame,
             gameState: gameState,
             onPausePressed: togglePause,
           ),
@@ -136,7 +168,7 @@ class _GamePageState extends ConsumerState<GamePage> {
               ),
             if (gameState == GameState.levelCompleted)
               LevelCompletedOverlay(
-                level: game.currentLevel + 1,
+                level: currentGame.currentLevel + 1,
               )
           ],
       ),

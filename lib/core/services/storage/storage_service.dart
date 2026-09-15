@@ -6,6 +6,7 @@ class StorageService {
   static const String _diamondsKey = 'diamonds';
   static const String _fastestLevelTimeKey = 'fastest_level_time';
   static const String _fastestLevelCompletedKey = 'fastest_level_completed';
+  static const String _playerStartSpeedKey = 'player_start_speed';
 
   Future<int> getUnlockedLevel() async {
     final prefs = await SharedPreferences.getInstance();
@@ -50,6 +51,16 @@ class StorageService {
   Future<int> getFastestLevelCompleted() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(_fastestLevelCompletedKey) ?? 0;
+  }
+
+  Future<double> getPlayerStartSpeed() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble(_playerStartSpeedKey) ?? 300.0;
+  }
+
+  Future<void> setPlayerStartSpeed(double speed) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble(_playerStartSpeedKey, speed);
   }
 
 }

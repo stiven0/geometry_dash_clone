@@ -37,8 +37,7 @@ class GameLifecycleManager {
     Future(() {
       gameHubNotifier.resetProgress();
     });
-    game.speedLevel = 0;
-    GeometryGame.worldSpeedValue = game.speeds[0];
+    game.resetWorldSpeed();
     game.playerController.reset();
     game.levelTimer.reset();
     levelLoader.clearLevel();
@@ -53,8 +52,7 @@ class GameLifecycleManager {
   Future<void> nextLevel() async {
     if (isChangingLevel) return;
     isChangingLevel = true;
-    game.speedLevel = 0;
-    GeometryGame.worldSpeedValue = game.speeds[0];
+    game.resetWorldSpeed();
 
     if (game.currentLevel == gameLevels.length - 1) {
       isGameCompleted = true;

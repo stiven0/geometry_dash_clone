@@ -6,6 +6,7 @@ import 'package:flame/components.dart';
 
 import 'package:geometry_dash/core/constants/game_palette.dart';
 import 'package:geometry_dash/features/game/presentation/providers/game_hub_provider.dart';
+import 'package:geometry_dash/features/game/presentation/providers/game_settings_provider.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/diamond_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/ground_block_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/jum_pad_widget.dart';
@@ -27,6 +28,7 @@ import 'package:geometry_dash/features/game/presentation/widgets/background_widg
 class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
 
   final int initialLevel;
+  final double initialWorldSpeed;
   late final GameHubNotifier gameHubNotifier;
   late final ProgressStateNotifier progressNotifier;
   final VoidCallback onGameCompleted;
@@ -54,19 +56,12 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
   late double rowHeight;
   late Stopwatch levelTimer;
   late int currentLevel;
+  late double worldSpeedValue;
 
   static const double playerSize = 30;
-  static double worldSpeedValue = 300;
   static const double trailInterval = 0.06;
   static const double groundRatio = 0.85;
   static const double groundThickness = 64;
-
-  int speedLevel = 0;
-  final List<double> speeds = [
-    300.0,
-    420.0,
-    500.0,
-  ];
   double progress = 0;
   double lastProgress = 0;
   double currentDistance = 0;
@@ -77,6 +72,7 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
 
   GeometryGame({
     required this.initialLevel,
+    required this.initialWorldSpeed,
     required this.gameHubNotifier,
     required this.progressNotifier,
     required this.onGameCompleted,
@@ -99,6 +95,7 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
 
     groundLevel = size.y * groundRatio;
     currentLevel = initialLevel - 1;
+    worldSpeedValue = _normalizeWorldSpeed(initialWorldSpeed);
 
     columnWidth = size.x / 20;
     rowHeight = (groundLevel - 40) / 8;
@@ -290,11 +287,17 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
   }
 
   void increaseSpeed() {
-    if (speedLevel < speeds.length - 1) {
-      speedLevel++;
-    }
+    worldSpeedValue = (worldSpeedValue * 1.15)
+        .clamp(kPlayerSpeedMin, kPlayerSpeedMax)
+        .toDouble();
+  }
 
-    worldSpeedValue = speeds[speedLevel];
+  void resetWorldSpeed() {
+    worldSpeedValue = _normalizeWorldSpeed(initialWorldSpeed);
+  }
+
+  double _normalizeWorldSpeed(double speed) {
+    return speed.clamp(kPlayerSpeedMin, kPlayerSpeedMax).toDouble();
   }
 
 }

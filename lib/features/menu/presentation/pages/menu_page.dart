@@ -6,6 +6,7 @@ import 'package:flame/game.dart';
 import 'package:geometry_dash/core/constants/game_palette.dart';
 import 'package:geometry_dash/core/constants/palettes.dart';
 import 'package:geometry_dash/features/game/presentation/providers/game_hub_provider.dart';
+import 'package:geometry_dash/features/game/presentation/providers/game_settings_provider.dart';
 import 'package:geometry_dash/features/menu/presentation/pages/level_select_page.dart';
 import 'package:geometry_dash/features/menu/presentation/providers/progress_state_provider.dart';
 import 'package:geometry_dash/features/menu/presentation/widgets/menu_background_game.dart';
@@ -45,6 +46,7 @@ class _MenuPageState extends ConsumerState<MenuPage> {
 
     Future.microtask(() {
       ref.read(gameHubProvider.notifier).loadInitialData();
+      ref.read(gameSettingsProvider.notifier).loadSettings();
       ref.read(progressStateProvider.notifier).loadProgress();
     });
   }
