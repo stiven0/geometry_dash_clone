@@ -4,7 +4,7 @@ import 'package:geometry_dash/features/game/data/repositories/game_settings_loca
 import 'package:geometry_dash/features/game/data/repositories/game_settings_repository_impl.dart';
 import 'package:geometry_dash/features/game/domain/repositories/game_settings_repository.dart';
 
-const double kPlayerSpeedMin = 300.0;
+const double kPlayerSpeedMin = 200.0;
 const double kPlayerSpeedMax = 600.0;
 const double kPlayerSpeedDefault = kPlayerSpeedMin;
 

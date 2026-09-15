@@ -96,6 +96,37 @@ class _GamePageState extends ConsumerState<GamePage> {
     });
   }
 
+  Future<void> openSettings() async {
+    final currentGame = game;
+    if (currentGame == null) return;
+
+    final shouldResume = gameState == GameState.playing;
+
+    if (shouldResume) {
+      currentGame.pauseEngine();
+      if (!mounted) return;
+      setState(() {
+        gameState = GameState.paused;
+      });
+    }
+
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => SpeedSettingsSheet(game: currentGame),
+    );
+
+    if (!mounted) return;
+
+    if (shouldResume) {
+      currentGame.resumeEngine();
+      setState(() {
+        gameState = GameState.playing;
+      });
+    }
+  }
+
   void goToMenu() {
     Navigator.pushAndRemoveUntil(
       context,
@@ -139,6 +170,7 @@ class _GamePageState extends ConsumerState<GamePage> {
             game: currentGame,
             gameState: gameState,
             onPausePressed: togglePause,
+            onSettingsPressed: openSettings,
           ),
 
           if (gameState == GameState.paused)

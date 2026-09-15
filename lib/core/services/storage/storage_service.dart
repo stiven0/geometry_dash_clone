@@ -55,7 +55,7 @@ class StorageService {
 
   Future<double> getPlayerStartSpeed() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getDouble(_playerStartSpeedKey) ?? 300.0;
+    return prefs.getDouble(_playerStartSpeedKey) ?? 200.0;
   }
 
   Future<void> setPlayerStartSpeed(double speed) async {

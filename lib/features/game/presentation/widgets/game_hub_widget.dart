@@ -12,12 +12,14 @@ class GameHubWidget extends ConsumerWidget {
   final GeometryGame game;
   final GameState gameState;
   final VoidCallback onPausePressed;
+  final VoidCallback onSettingsPressed;
 
   const GameHubWidget({
     super.key, 
     required this.game,
     required this.gameState,
     required this.onPausePressed,
+    required this.onSettingsPressed,
   });
 
   @override
@@ -91,14 +93,7 @@ class GameHubWidget extends ConsumerWidget {
                 ),
 
                 IconButton(
-                  onPressed: () {
-                    showModalBottomSheet<void>(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (_) => const _SpeedSettingsSheet(),
-                    );
-                  },
+                  onPressed: onSettingsPressed,
                   icon: const Icon(Icons.settings),
                 ),
               ],
@@ -117,14 +112,16 @@ class GameHubWidget extends ConsumerWidget {
   }
 }
 
-class _SpeedSettingsSheet extends ConsumerStatefulWidget {
-  const _SpeedSettingsSheet();
+class SpeedSettingsSheet extends ConsumerStatefulWidget {
+  final GeometryGame game;
+
+  const SpeedSettingsSheet({super.key, required this.game});
 
   @override
-  ConsumerState<_SpeedSettingsSheet> createState() => _SpeedSettingsSheetState();
+  ConsumerState<SpeedSettingsSheet> createState() => _SpeedSettingsSheetState();
 }
 
-class _SpeedSettingsSheetState extends ConsumerState<_SpeedSettingsSheet> {
+class _SpeedSettingsSheetState extends ConsumerState< SpeedSettingsSheet> {
   late double selectedSpeed;
 
   String get selectedSpeedString => selectedSpeed.toStringAsFixed(0);
@@ -185,6 +182,8 @@ class _SpeedSettingsSheetState extends ConsumerState<_SpeedSettingsSheet> {
                   await ref
                       .read(gameSettingsProvider.notifier)
                       .setPlayerStartSpeed(selectedSpeed);
+
+                  widget.game.applyPlayerSpeed(selectedSpeed);
 
                   if (!context.mounted) return;
                   Navigator.pop(context);
