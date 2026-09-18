@@ -20,14 +20,16 @@ jobs:
           flutter-version: 3.32.2
           cache: true
 
-      # - name: Install Android NDK
-      #   uses: android-actions/setup-android@v3
-
       - name: Install dependencies
         run: flutter pub get
 
       - name: Analyze
         run: flutter analyze
+
+      - name: Settup Android NDK
+        uses: android-actions/setup-android@v4
+        with:
+          packages: ''
 
       - name: Install required NDK
         run: |
