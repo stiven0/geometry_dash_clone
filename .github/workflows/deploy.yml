@@ -20,14 +20,19 @@ jobs:
           flutter-version: 3.32.2
           cache: true
 
-      - name: Install Android NDK
-        uses: android-actions/setup-android@v3
+      # - name: Install Android NDK
+      #   uses: android-actions/setup-android@v3
 
       - name: Install dependencies
         run: flutter pub get
 
       - name: Analyze
         run: flutter analyze
+
+      - name: Install required NDK
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager "ndk;27.0.12077973"
 
       - name: Restore keystore
         run: |
@@ -41,11 +46,6 @@ jobs:
           keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
           storeFile=upload-keystore.jks
           EOF
-
-      - name: Install required NDK
-        run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "ndk;27.0.12077973"
 
       - name: Build AAB
         run: flutter build appbundle --release
