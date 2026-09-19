@@ -5,6 +5,13 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -36,6 +43,20 @@ jobs:
           yes | sdkmanager --licenses > /dev/null || true
           sdkmanager "ndk;27.0.12077973"
 
+      - name: Increment version code
+        run: |
+          VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+
+          VERSION_NAME=$(echo "$VERSION" | cut -d'+' -f1)
+          CURRENT_BUILD=$(echo "$VERSION" | cut -d'+' -f2)
+
+          NEXT_BUILD=$((CURRENT_BUILD + 1))
+
+          echo "Current version: $VERSION_NAME+$CURRENT_BUILD"
+          echo "New version: $VERSION_NAME+$NEXT_BUILD"
+
+          sed -i "s/^version:.*/version: ${VERSION_NAME}+${NEXT_BUILD}/" pubspec.yaml
+
       - name: Restore keystore
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
@@ -60,3 +81,12 @@ jobs:
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           tracks: internal
           status: completed
+      
+      - name: Commit version code
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add pubspec.yaml
+          git commit -m "ci: increment Android version code [skip ci]"
+          git push
