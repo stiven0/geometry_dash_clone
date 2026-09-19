@@ -33,7 +33,7 @@ class PlayerController {
       palette: palette,
       position: Vector2(
         initialX,
-        groundLevel() - playerSize,
+        groundLevel() - playerSize / 2,
       ),
       height: playerSize,
       onSpikeCollision: onGameOver,
@@ -56,14 +56,14 @@ class PlayerController {
     player.applyGravity(dt);
     _checkPlatformCollision();
 
-    final playerGround = groundLevel() - player.size.y;
+    final playerGround = groundLevel() - player.halfHeight;
     if (player.position.y >= playerGround) {
       player.landOnGround(playerGround);
     }
   }
 
   void reset() {
-    player.reset(groundLevel());
+    player.reset(x: initialX, groundLevel: groundLevel());
   }
 
   bool get isDead => player.isDead;
@@ -73,11 +73,11 @@ class PlayerController {
       return;
     }
 
-    final playerLeft = player.position.x;
-    final playerRight = player.position.x + player.size.x;
+    final playerLeft = player.left;
+    final playerRight = player.right;
 
-    final previousBottom = player.previousY + player.size.y;
-    final currentBottom = player.position.y + player.size.y;
+    final previousBottom = player.previousY + player.halfHeight;
+    final currentBottom = player.bottom;
 
     for (final platform in platforms) {
       final platformLeft = platform.position.x;
@@ -85,7 +85,7 @@ class PlayerController {
 
       final overlapsX = playerRight > platformLeft && playerLeft < platformRight;
 
-      final playerCenterY = player.position.y + player.size.y / 2;
+      final playerCenterY = player.position.y;
       final insideHeight = playerCenterY > platform.position.y && playerCenterY < platform.position.y + platform.size.y;
 
       if (overlapsX && insideHeight) {
@@ -101,7 +101,7 @@ class PlayerController {
       final landed = player.velocityY > 0 && previousBottom <= platformTop && currentBottom >= platformTop;
 
       if (landed) {
-        player.position.y = platformTop - player.size.y;
+        player.position.y = platformTop - player.halfHeight;
         player.velocityY = 0;
         player.isJumping = false;
         player.isOnPlatform = true;
@@ -110,13 +110,13 @@ class PlayerController {
         return;
       }
 
-      final previousTop = player.previousY;
-      final currentTop = player.position.y;
+      final previousTop = player.previousY - player.halfHeight;
+      final currentTop = player.top;
       final platformBottom = platform.position.y + platform.size.y;
       final hitBottom = player.velocityY < 0 && previousTop >= platformBottom && currentTop <= platformBottom;
 
       if (hitBottom) {
-        player.position.y = platformBottom;
+        player.position.y = platformBottom + player.halfHeight;
         player.velocityY = 0;
         return;
       }

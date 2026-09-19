@@ -39,7 +39,15 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
   }) : super(
     position: position,
     size: Vector2(30, height),
+    anchor: Anchor.center,
   );
+
+  double get halfWidth => size.x / 2;
+  double get halfHeight => size.y / 2;
+  double get left => position.x - halfWidth;
+  double get right => position.x + halfWidth;
+  double get top => position.y - halfHeight;
+  double get bottom => position.y + halfHeight;
 
   @override
   Future<void> onLoad() async {
@@ -173,11 +181,11 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
     if (currentPlatform != null) {
       final right = currentPlatform!.position.x + currentPlatform!.size.x;
 
-      if (position.x >= right) {
+      if (left >= right) {
         currentPlatform = null;
         isOnPlatform = false;
       } else {
-        position.y = currentPlatform!.position.y - size.y;
+        position.y = currentPlatform!.position.y - halfHeight;
         velocityY = 0;
         return;
       }
@@ -214,10 +222,10 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
     isDead = false;
   }
 
-  void reset(double groundLevel) {
+  void reset({required double x, required double groundLevel}) {
     position = Vector2(
-      size.x * 0.10 + 50,
-      groundLevel - size.y,
+      x,
+      groundLevel - halfHeight,
     );
 
     angle = 0;
@@ -225,8 +233,8 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
     isJumping = false;
   }
 
-  void landOnGround(double groundY) {
-    position.y = groundY;
+  void landOnGround(double centerY) {
+    position.y = centerY;
     velocityY = 0;
     isJumping = false;
     currentPlatform = null;

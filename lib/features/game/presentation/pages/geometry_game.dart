@@ -231,9 +231,8 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
         TrailParticleWidget(
           game: this,
           position: Vector2(
-            player.position.x - 15,
-            player.position.y +
-                player.size.y * 0.7,
+            player.left - 15,
+            player.position.y + player.size.y * 0.2,
           ),
           speed: worldSpeedValue,
         ),
