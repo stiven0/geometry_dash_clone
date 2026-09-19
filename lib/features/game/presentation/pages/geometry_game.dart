@@ -186,6 +186,7 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
     playerController = PlayerController(
       initialX: size.x * 0.10,
       groundLevel: () => groundLevel,
+      palette: () => palette,
       platforms: platforms,
       onGameOver: gameOver,
       onSpeedPortalCollision: increaseSpeed,

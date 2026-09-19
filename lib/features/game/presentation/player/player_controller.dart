@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
+import 'package:geometry_dash/core/constants/game_palette.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/player_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/platform_widget.dart';
 
@@ -9,6 +10,7 @@ class PlayerController {
 
   final double initialX;
   final double Function() groundLevel;
+  final GamePalette Function() palette;
   final List<PlatformWidget> platforms;
   final VoidCallback onGameOver;
   final VoidCallback onSpeedPortalCollision;
@@ -19,6 +21,7 @@ class PlayerController {
   PlayerController({
     required this.initialX,
     required this.groundLevel,
+    required this.palette,
     required this.platforms,
     required this.onGameOver,
     required this.onSpeedPortalCollision,
@@ -27,12 +30,12 @@ class PlayerController {
 
   PlayerWidget createPlayer() {
     player = PlayerWidget(
+      palette: palette,
       position: Vector2(
         initialX,
         groundLevel() - playerSize,
       ),
       height: playerSize,
-      paint: Paint()..color = Colors.white,
       onSpikeCollision: onGameOver,
       onSpeedPortalCollision: onSpeedPortalCollision,
       onDiamondCollision: onDiamondCollected,

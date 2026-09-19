@@ -29,6 +29,8 @@ class Palettes {
     jumpRing: Colors.yellow,
     jumpRingInner: Colors.orange,
     jumpRingGlow: Color(0x33FFFF00),
+    player: Color(0xFFF4F7FB),
+    playerAccent: Colors.cyanAccent,
   );
 
   static const lava = GamePalette(
@@ -57,6 +59,8 @@ class Palettes {
     jumpRing: Colors.orangeAccent,
     jumpRingInner: Colors.deepOrange,
     jumpRingGlow: Color(0x33FF8C00),
+    player: Color(0xFFFFF3E8),
+    playerAccent: Colors.deepOrangeAccent,
   );
 
   static const neon = GamePalette(
@@ -85,6 +89,8 @@ class Palettes {
     jumpRing: Colors.pinkAccent,
     jumpRingInner: Colors.purpleAccent,
     jumpRingGlow: Color(0x33FF4081),
+    player: Color(0xFFF7F2FF),
+    playerAccent: Colors.pinkAccent,
   );
 
   static const ice = GamePalette(
@@ -113,6 +119,8 @@ class Palettes {
     jumpRing: Colors.cyanAccent,
     jumpRingInner: Colors.blueAccent,
     jumpRingGlow: Color(0x3300FFFF),
+    player: Color(0xFFF2F8FF),
+    playerAccent: Colors.lightBlueAccent,
   );
 
   static const forest = GamePalette(
@@ -141,6 +149,8 @@ class Palettes {
     jumpRing: Colors.yellowAccent,
     jumpRingInner: Colors.greenAccent,
     jumpRingGlow: Color(0x33ADFF2F),
+    player: Color(0xFFF3FFEF),
+    playerAccent: Colors.greenAccent,
   );
 
   static const space = GamePalette(
@@ -169,6 +179,8 @@ class Palettes {
     jumpRing: Colors.cyanAccent,
     jumpRingInner: Colors.deepPurpleAccent,
     jumpRingGlow: Color(0x3300FFFF),
+    player: Color(0xFFF4F0FF),
+    playerAccent: Colors.deepPurpleAccent,
   );
 
   static const desert = GamePalette(
@@ -197,6 +209,8 @@ class Palettes {
     jumpRing: Colors.amberAccent,
     jumpRingInner: Colors.orange,
     jumpRingGlow: Color(0x33FFD54F),
+    player: Color(0xFFFFF6E8),
+    playerAccent: Colors.orangeAccent,
   );
 
 }

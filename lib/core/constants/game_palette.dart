@@ -16,6 +16,8 @@ class GamePalette {
   final Color jumpRing;
   final Color jumpRingInner;
   final Color jumpRingGlow;
+  final Color player;
+  final Color playerAccent;
 
   const GamePalette({
     required this.backgroundGradient,
@@ -33,6 +35,8 @@ class GamePalette {
     required this.jumpRing,
     required this.jumpRingInner,
     required this.jumpRingGlow,
+    required this.player,
+    required this.playerAccent,
   });
 
 }
