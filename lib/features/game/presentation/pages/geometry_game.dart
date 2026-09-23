@@ -146,6 +146,7 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
       toWidth: toWidth,
       toHeight: toHeight,
       onDiamondCollected: createDiamondExplosion,
+      onShieldCollected: createShieldExplosion,
     );
     lifecycleManager = GameLifecycleManager(
       game: this,
@@ -264,6 +265,10 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
 
   void createDiamondExplosion() {
     effectsManager.createDiamondExplosion(player.position);
+  }
+
+  void createShieldExplosion() {
+    effectsManager.createShieldExplosion(player.position);
   }
 
   void createBackground() {

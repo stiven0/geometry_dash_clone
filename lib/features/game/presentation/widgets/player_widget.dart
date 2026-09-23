@@ -13,6 +13,7 @@ import 'package:geometry_dash/features/game/presentation/widgets/spike_widget.da
 class PlayerWidget extends PositionComponent with CollisionCallbacks {
   final GamePalette Function() palette;
   final bool Function() isShieldActive;
+  final double Function() shieldTimer;
   final VoidCallback? onSpikeCollision;
   final VoidCallback? onDiamondCollision;
   final VoidCallback? onSpeedPortalCollision;
@@ -37,6 +38,7 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
     required Vector2 position,
     required double height,
     required this.isShieldActive,
+    required this.shieldTimer,
     required this.onSpikeCollision,
     required this.onSpeedPortalCollision,
     required this.onDiamondCollision,
@@ -143,6 +145,8 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
           ..strokeWidth = 2.5
           ..color = currentPalette.shield,
       );
+
+      _renderShieldTimer(canvas, currentPalette);
     }
 
     canvas.drawRRect(
@@ -152,6 +156,58 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
         ..strokeWidth = 2
         ..color = Colors.black87,
     );
+  }
+
+  void _renderShieldTimer(Canvas canvas, GamePalette currentPalette) {
+    canvas.save();
+    canvas.translate(size.x / 2, size.y / 2);
+    canvas.rotate(-angle);
+
+    final badgeCenter = Offset(0, -halfHeight - 14);
+    canvas.drawCircle(
+      badgeCenter,
+      10,
+      Paint()
+        ..color = currentPalette.shieldGlow.withValues(alpha: 0.7)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6),
+    );
+    canvas.drawCircle(
+      badgeCenter,
+      9,
+      Paint()..color = currentPalette.shield.withValues(alpha: 0.92),
+    );
+    canvas.drawCircle(
+      badgeCenter,
+      9,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.2
+        ..color = Colors.white.withValues(alpha: 0.55),
+    );
+
+    final remaining = shieldTimer().ceil().clamp(1, 9);
+    final textPainter = TextPainter(
+      text: TextSpan(
+        text: '$remaining',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 11,
+          fontWeight: FontWeight.w800,
+          height: 1,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+
+    textPainter.paint(
+      canvas,
+      Offset(
+        badgeCenter.dx - textPainter.width / 2,
+        badgeCenter.dy - textPainter.height / 2,
+      ),
+    );
+
+    canvas.restore();
   }
 
   @override

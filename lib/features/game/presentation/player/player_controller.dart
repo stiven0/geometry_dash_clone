@@ -41,6 +41,7 @@ class PlayerController {
       ),
       height: playerSize,
       isShieldActive: () => isShieldActive,
+      shieldTimer: () => shieldTimer,
       onSpikeCollision: onGameOver,
       onSpeedPortalCollision: onSpeedPortalCollision,
       onDiamondCollision: onDiamondCollected,

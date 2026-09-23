@@ -29,6 +29,7 @@ class LevelLoader {
   final double Function(double columns) toWidth;
   final double Function(double rows) toHeight;
   final VoidCallback onDiamondCollected;
+  final VoidCallback onShieldCollected;
 
   LevelLoader({
     required this.game,
@@ -46,6 +47,7 @@ class LevelLoader {
     required this.toWidth,
     required this.toHeight,
     required this.onDiamondCollected,
+    required this.onShieldCollected,
   });
 
   double loadLevel(int index) {
@@ -253,6 +255,7 @@ class LevelLoader {
     final shield = ShieldWidget(
       game: game,
       position: Vector2(x, y),
+      onCollect: onShieldCollected,
     );
     shields.add(shield);
     game.add(shield);
