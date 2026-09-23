@@ -52,5 +52,6 @@ final level27 = Level(
     LevelObject(type: LevelObjectType.spike, column: 123, row: 0),
     LevelObject(type: LevelObjectType.platform, column: 127, row: 0, columns: 5, rows: .5),
     LevelObject(type: LevelObjectType.spike, column: 133, row: 0),
+    LevelObject(type: LevelObjectType.shield, column: 105.1, row: 0.8),
   ],
 );

@@ -148,5 +148,11 @@ final level4 = Level(
       column: 76,
       row: 0,
     ),
+
+    LevelObject(
+      type: LevelObjectType.shield,
+      column: 78,
+      row: 1.0,
+    ),
   ],
 );

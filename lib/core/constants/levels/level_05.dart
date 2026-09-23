@@ -136,6 +136,12 @@ final level5 = Level(
     ),
 
     LevelObject(
+      type: LevelObjectType.shield,
+      column: 66.5,
+      row: 1.3,
+    ),
+
+    LevelObject(
       type: LevelObjectType.platform,
       column: 68,
       row: 0,

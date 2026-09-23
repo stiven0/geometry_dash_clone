@@ -35,6 +35,7 @@ final level9 = Level(
     LevelObject(type: LevelObjectType.diamond, column: 87, row: 5),
 
     LevelObject(type: LevelObjectType.speedPortal, column: 90, row: 0),
+    LevelObject(type: LevelObjectType.shield, column: 91.5, row: 2.6),
     LevelObject(type: LevelObjectType.platform, column: 93, row: 1.5, columns: 5, rows: .5),
     LevelObject(type: LevelObjectType.jumpRing, column: 103, row: 4),
     LevelObject(type: LevelObjectType.platform, column: 106, row: 0, columns: 1, rows: 3),

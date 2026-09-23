@@ -18,6 +18,7 @@ final level6 = Level(
     LevelObject(type: LevelObjectType.spike, column: 38, row: 0),
 
     LevelObject(type: LevelObjectType.speedPortal, column: 41, row: 0),
+    LevelObject(type: LevelObjectType.shield, column: 42.5, row: 1.1),
     LevelObject(type: LevelObjectType.platform, column: 44, row: 1.5, columns: 4.5, rows: .5),
     LevelObject(type: LevelObjectType.spike, column: 49, row: 0),
 

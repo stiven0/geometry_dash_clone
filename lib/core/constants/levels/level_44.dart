@@ -57,5 +57,6 @@ final level44 = Level(
     LevelObject(type: LevelObjectType.platform, column: 147, row: 2, columns: 4.5, rows: .5),
     LevelObject(type: LevelObjectType.jumpPad, column: 151, row: 0),
     LevelObject(type: LevelObjectType.platform, column: 155, row: 1.5, columns: 4, rows: .5),
+    LevelObject(type: LevelObjectType.shield, column: 116.2, row: 1.0),
   ],
 );
