@@ -5,6 +5,7 @@ enum LevelObjectType {
   diamond,
   jumpRing,
   speedPortal,
+  shield,
 }
 
 class LevelObject {

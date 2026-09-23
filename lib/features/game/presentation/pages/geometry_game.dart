@@ -19,6 +19,7 @@ import 'package:geometry_dash/features/game/presentation/player/player_controlle
 import 'package:geometry_dash/features/game/presentation/systems/world_movement_system.dart';
 import 'package:geometry_dash/features/game/presentation/level/level_loader.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/player_widget.dart';
+import 'package:geometry_dash/features/game/presentation/widgets/shield_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/speed_portal_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/spike_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/trialparticle_widget.dart';
@@ -50,6 +51,7 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
   late final List<DiamondWidget> diamonds = [];
   late final List<JumpRingWidget> jumpRings = [];
   late final List<SpeedPortalWidget> speedPortals = [];
+  late final List<ShieldWidget> shields = [];
   late final BackgroundWidget background;
   late GamePalette palette;
   late double columnWidth;
@@ -124,6 +126,7 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
       diamonds: diamonds,
       jumpRings: jumpRings,
       speedPortals: speedPortals,
+      shields: shields,
       worldSpeed: () => worldSpeedValue,
     );
     effectsManager = EffectsManager(this);
@@ -136,6 +139,7 @@ class GeometryGame extends FlameGame with HasCollisionDetection, TapCallbacks {
       diamonds: diamonds,
       jumpRings: jumpRings,
       speedPortals: speedPortals,
+      shields: shields,
       groundLevel: () => groundLevel,
       toX: toX,
       toY: toY,

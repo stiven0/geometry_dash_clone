@@ -6,14 +6,17 @@ import 'package:geometry_dash/features/game/presentation/widgets/diamond_widget.
 import 'package:geometry_dash/features/game/presentation/widgets/jum_pad_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/jum_ring_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/platform_widget.dart';
+import 'package:geometry_dash/features/game/presentation/widgets/shield_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/speed_portal_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/spike_widget.dart';
 
 class PlayerWidget extends PositionComponent with CollisionCallbacks {
   final GamePalette Function() palette;
+  final bool Function() isShieldActive;
   final VoidCallback? onSpikeCollision;
   final VoidCallback? onDiamondCollision;
   final VoidCallback? onSpeedPortalCollision;
+  final VoidCallback? onShieldCollected;
 
   bool isDead = false;
   bool canUseJumpRing = false;
@@ -33,9 +36,11 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
     required this.palette,
     required Vector2 position,
     required double height,
+    required this.isShieldActive,
     required this.onSpikeCollision,
     required this.onSpeedPortalCollision,
     required this.onDiamondCollision,
+    required this.onShieldCollected,
   }) : super(
     position: position,
     size: Vector2(30, height),
@@ -124,6 +129,22 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
       canvas.drawCircle(dot, dotRadius, dotPaint);
     }
 
+    if (isShieldActive()) {
+      canvas.drawRRect(
+        body.inflate(5),
+        Paint()
+          ..color = currentPalette.shieldGlow
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10),
+      );
+      canvas.drawRRect(
+        body,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2.5
+          ..color = currentPalette.shield,
+      );
+    }
+
     canvas.drawRRect(
       body,
       Paint()
@@ -140,7 +161,9 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
   ) {
 
     if (other is SpikeWidget) {
-      onSpikeCollision?.call();
+      if (!isShieldActive()) {
+        onSpikeCollision?.call();
+      }
     }
 
     if (other is JumpPadWidget) {
@@ -167,6 +190,10 @@ class PlayerWidget extends PositionComponent with CollisionCallbacks {
 
     if(other is DiamondWidget) {
       onDiamondCollision?.call();
+    }
+
+    if (other is ShieldWidget) {
+      onShieldCollected?.call();
     }
 
     super.onCollisionStart(

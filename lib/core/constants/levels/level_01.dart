@@ -6,6 +6,12 @@ final level1 = Level(
   objects: [
 
     LevelObject(
+      type: LevelObjectType.shield,
+      column: 10,
+      row: 2,
+    ),
+
+    LevelObject(
       type: LevelObjectType.platform,
       column: 12,
       row: 0,

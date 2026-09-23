@@ -7,6 +7,7 @@ import 'package:geometry_dash/features/game/presentation/widgets/platform_widget
 import 'package:geometry_dash/features/game/presentation/widgets/speed_portal_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/spike_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/diamond_widget.dart';
+import 'package:geometry_dash/features/game/presentation/widgets/shield_widget.dart';
 
 class WorldMovementSystem {
   final RectangleComponent ground1;
@@ -18,6 +19,7 @@ class WorldMovementSystem {
   final List<DiamondWidget> diamonds;
   final List<JumpRingWidget> jumpRings;
   final List<SpeedPortalWidget> speedPortals;
+  final List<ShieldWidget> shields;
   final double Function() worldSpeed;
 
   WorldMovementSystem({
@@ -30,6 +32,7 @@ class WorldMovementSystem {
     required this.diamonds,
     required this.jumpRings,
     required this.speedPortals,
+    required this.shields,
     required this.worldSpeed,
   });
 
@@ -42,6 +45,7 @@ class WorldMovementSystem {
     updateDiamonds(dt);
     updateJumpRings(dt);
     updateSpeedPortals(dt);
+    updateShields(dt);
   }
 
   void updateGround(double dt) {
@@ -112,6 +116,13 @@ class WorldMovementSystem {
     final speed = worldSpeed();
     for (final portal in speedPortals) {
       portal.position.x -= speed * dt;
+    }
+  }
+
+  void updateShields(double dt) {
+    final speed = worldSpeed();
+    for (final shield in shields) {
+      shield.position.x -= speed * dt;
     }
   }
 }

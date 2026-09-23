@@ -9,6 +9,8 @@ class GamePalette {
   final Color spikeGlow;
   final Color diamond;
   final Color diamondShadow;
+  final Color shield;
+  final Color shieldGlow;
   final Color portal;
   final Color trail;
   final List<Color> jumpPadGradient;
@@ -28,6 +30,8 @@ class GamePalette {
     required this.spikeGlow,
     required this.diamond,
     required this.diamondShadow,
+    required this.shield,
+    required this.shieldGlow,
     required this.portal,
     required this.trail,
     required this.jumpPadGradient,

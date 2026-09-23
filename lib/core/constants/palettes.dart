@@ -19,6 +19,8 @@ class Palettes {
     spikeGlow: Color(0x147DF9FF),
     diamond: Colors.cyanAccent,
     diamondShadow: Colors.blueAccent,
+    shield: Color(0xFF5CDBFF),
+    shieldGlow: Color(0x335CDBFF),
     portal: Colors.cyanAccent,
     trail: Colors.white,
     jumpPadGradient: [
@@ -49,6 +51,8 @@ class Palettes {
     spikeGlow: Color(0x14FF5722),
     diamond: Colors.amberAccent,
     diamondShadow: Colors.deepOrange,
+    shield: Color(0xFFFFB347),
+    shieldGlow: Color(0x33FFB347),
     portal: Colors.redAccent,
     trail: Colors.orange,
     jumpPadGradient: [
@@ -79,6 +83,8 @@ class Palettes {
     spikeGlow: Color(0x14FF4081),
     diamond: Colors.greenAccent,
     diamondShadow: Colors.purple,
+    shield: Color(0xFFE040FB),
+    shieldGlow: Color(0x33E040FB),
     portal: Colors.purpleAccent,
     trail: Colors.cyanAccent,
     jumpPadGradient: [
@@ -109,6 +115,8 @@ class Palettes {
     spikeGlow: Color(0x1400BFFF),
     diamond: Colors.white,
     diamondShadow: Colors.lightBlueAccent,
+    shield: Color(0xFF90CAF9),
+    shieldGlow: Color(0x3390CAF9),
     portal: Colors.blueAccent,
     trail: Colors.lightBlueAccent,
     jumpPadGradient: [
@@ -139,6 +147,8 @@ class Palettes {
     spikeGlow: Color(0x1400FF00),
     diamond: Colors.yellowAccent,
     diamondShadow: Colors.green,
+    shield: Color(0xFF69F0AE),
+    shieldGlow: Color(0x3369F0AE),
     portal: Colors.greenAccent,
     trail: Colors.lightGreenAccent,
     jumpPadGradient: [
@@ -169,6 +179,8 @@ class Palettes {
     spikeGlow: Color(0x140D47A1),
     diamond: Colors.cyanAccent,
     diamondShadow: Colors.deepPurpleAccent,
+    shield: Color(0xFFB388FF),
+    shieldGlow: Color(0x33B388FF),
     portal: Colors.deepPurpleAccent,
     trail: Colors.purpleAccent,
     jumpPadGradient: [
@@ -199,6 +211,8 @@ class Palettes {
     spikeGlow: Color(0x14FF8C00),
     diamond: Colors.yellowAccent,
     diamondShadow: Colors.orangeAccent,
+    shield: Color(0xFFFFD54F),
+    shieldGlow: Color(0x33FFD54F),
     portal: Colors.orangeAccent,
     trail: Colors.deepOrangeAccent,
     jumpPadGradient: [

@@ -7,6 +7,7 @@ import 'package:geometry_dash/features/game/presentation/widgets/platform_widget
 
 class PlayerController {
   static const double playerSize = 30;
+  static const double shieldDuration = 5.0;
 
   final double initialX;
   final double Function() groundLevel;
@@ -17,6 +18,9 @@ class PlayerController {
   final VoidCallback onDiamondCollected;
 
   late final PlayerWidget player;
+
+  bool isShieldActive = false;
+  double shieldTimer = 0;
 
   PlayerController({
     required this.initialX,
@@ -36,12 +40,19 @@ class PlayerController {
         groundLevel() - playerSize / 2,
       ),
       height: playerSize,
+      isShieldActive: () => isShieldActive,
       onSpikeCollision: onGameOver,
       onSpeedPortalCollision: onSpeedPortalCollision,
       onDiamondCollision: onDiamondCollected,
+      onShieldCollected: activateShield,
     );
 
     return player;
+  }
+
+  void activateShield() {
+    isShieldActive = true;
+    shieldTimer = shieldDuration;
   }
 
   void onTapDown() {
@@ -53,6 +64,14 @@ class PlayerController {
   }
 
   void update(double dt) {
+    if (isShieldActive) {
+      shieldTimer -= dt;
+      if (shieldTimer <= 0) {
+        isShieldActive = false;
+        shieldTimer = 0;
+      }
+    }
+
     player.applyGravity(dt);
     _checkPlatformCollision();
 
@@ -63,6 +82,8 @@ class PlayerController {
   }
 
   void reset() {
+    isShieldActive = false;
+    shieldTimer = 0;
     player.reset(x: initialX, groundLevel: groundLevel());
   }
 
@@ -89,6 +110,9 @@ class PlayerController {
       final insideHeight = playerCenterY > platform.position.y && playerCenterY < platform.position.y + platform.size.y;
 
       if (overlapsX && insideHeight) {
+        if (isShieldActive) {
+          continue;
+        }
         onGameOver();
         return;
       }

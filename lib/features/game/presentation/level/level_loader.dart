@@ -9,6 +9,7 @@ import 'package:geometry_dash/features/game/presentation/widgets/ground_block_wi
 import 'package:geometry_dash/features/game/presentation/widgets/jum_pad_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/jum_ring_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/platform_widget.dart';
+import 'package:geometry_dash/features/game/presentation/widgets/shield_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/speed_portal_widget.dart';
 import 'package:geometry_dash/features/game/presentation/widgets/spike_widget.dart';
 
@@ -21,6 +22,7 @@ class LevelLoader {
   final List<DiamondWidget> diamonds;
   final List<JumpRingWidget> jumpRings;
   final List<SpeedPortalWidget> speedPortals;
+  final List<ShieldWidget> shields;
   final double Function() groundLevel;
   final double Function(double column) toX;
   final double Function(double row) toY;
@@ -37,6 +39,7 @@ class LevelLoader {
     required this.diamonds,
     required this.jumpRings,
     required this.speedPortals,
+    required this.shields,
     required this.groundLevel,
     required this.toX,
     required this.toY,
@@ -90,6 +93,12 @@ class LevelLoader {
             fast: true,
           );
           break;
+        case LevelObjectType.shield:
+          _addShield(
+            x: toX(object.column),
+            y: groundLevel() - toY(object.row),
+          );
+          break;
       }
     }
 
@@ -129,6 +138,11 @@ class LevelLoader {
       portal.removeFromParent();
     }
     speedPortals.clear();
+
+    for (final shield in shields) {
+      shield.removeFromParent();
+    }
+    shields.clear();
 
     for (final block in groundBlocks) {
       block.removeFromParent();
@@ -230,5 +244,17 @@ class LevelLoader {
     );
     speedPortals.add(portal);
     game.add(portal);
+  }
+
+  void _addShield({
+    required double x,
+    required double y,
+  }) {
+    final shield = ShieldWidget(
+      game: game,
+      position: Vector2(x, y),
+    );
+    shields.add(shield);
+    game.add(shield);
   }
 }
