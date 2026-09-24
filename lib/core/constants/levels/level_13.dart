@@ -23,6 +23,8 @@ final level13 = Level(
 
     LevelObject(type: LevelObjectType.speedPortal, column: 47, row: 0),
     LevelObject(type: LevelObjectType.spike, column: 50, row: 0),
+    LevelObject(type: LevelObjectType.shield, column: 52.3, row: 3.0),
+
     LevelObject(type: LevelObjectType.platform, column: 53, row: 2, columns: 4.5, rows: .5),
     LevelObject(type: LevelObjectType.jumpRing, column: 58, row: 4),
     LevelObject(type: LevelObjectType.platform, column: 61, row: 0, columns: 1, rows: 2.5),
@@ -55,6 +57,5 @@ final level13 = Level(
     LevelObject(type: LevelObjectType.spike, column: 138, row: 0),
     LevelObject(type: LevelObjectType.platform, column: 141, row: 1.5, columns: 5, rows: .5),
     LevelObject(type: LevelObjectType.spike, column: 147, row: 0),
-    LevelObject(type: LevelObjectType.shield, column: 75.0, row: 2.8),
   ],
 );

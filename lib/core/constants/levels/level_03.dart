@@ -40,6 +40,12 @@ final level3 = Level(
     ),
 
     LevelObject(
+      type: LevelObjectType.shield,
+      column: 27.5,
+      row: 1.2,
+    ),
+
+    LevelObject(
       type: LevelObjectType.jumpRing,
       column: 30,
       row: 3,
@@ -99,12 +105,6 @@ final level3 = Level(
       type: LevelObjectType.speedPortal,
       column: 53,
       row: 0,
-    ),
-
-    LevelObject(
-      type: LevelObjectType.shield,
-      column: 54.5,
-      row: 2.2,
     ),
 
     LevelObject(

@@ -26,6 +26,8 @@ final level32 = Level(
     LevelObject(type: LevelObjectType.platform, column: 54.2, row: 1.5, columns: 4.5, rows: .5),
 
     LevelObject(type: LevelObjectType.diamond, column: 57, row: 5),
+    LevelObject(type: LevelObjectType.shield, column: 61.3, row: 1.2),
+
     LevelObject(type: LevelObjectType.spike, column: 62, row: 0),
     LevelObject(type: LevelObjectType.platform, column: 65, row: 2, columns: 4.5, rows: .5),
     LevelObject(type: LevelObjectType.jumpPad, column: 69, row: 0),
@@ -55,6 +57,5 @@ final level32 = Level(
     LevelObject(type: LevelObjectType.platform, column: 132, row: 0, columns: 5, rows: .5),
     LevelObject(type: LevelObjectType.spike, column: 138, row: 0),
     LevelObject(type: LevelObjectType.diamond, column: 142, row: 4),
-    LevelObject(type: LevelObjectType.shield, column: 59.5, row: 0.9),
   ],
 );

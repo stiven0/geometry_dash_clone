@@ -46,6 +46,12 @@ final level4 = Level(
     ),
 
     LevelObject(
+      type: LevelObjectType.shield,
+      column: 32,
+      row: 2.4,
+    ),
+
+    LevelObject(
       type: LevelObjectType.spike,
       column: 34,
       row: 0,
@@ -147,12 +153,6 @@ final level4 = Level(
       type: LevelObjectType.spike,
       column: 76,
       row: 0,
-    ),
-
-    LevelObject(
-      type: LevelObjectType.shield,
-      column: 78,
-      row: 1.0,
     ),
   ],
 );

@@ -21,6 +21,7 @@ final level10 = Level(
     LevelObject(type: LevelObjectType.platform, column: 45.5, row: 0, columns: 1, rows: 3),
     LevelObject(type: LevelObjectType.platform, column: 48, row: 1.5, columns: 4.5, rows: .5),
     LevelObject(type: LevelObjectType.diamond, column: 50, row: 5),
+    LevelObject(type: LevelObjectType.shield, column: 53, row: 1.6),
 
     LevelObject(type: LevelObjectType.spike, column: 55, row: 0),
     LevelObject(type: LevelObjectType.jumpRing, column: 59, row: 4),
@@ -29,7 +30,6 @@ final level10 = Level(
     LevelObject(type: LevelObjectType.jumpPad, column: 69, row: 0),
     LevelObject(type: LevelObjectType.platform, column: 73, row: 1.2, columns: 5, rows: .5),
     LevelObject(type: LevelObjectType.spike, column: 79, row: 0),
-    LevelObject(type: LevelObjectType.shield, column: 80.5, row: 1.0),
     LevelObject(type: LevelObjectType.platform, column: 82, row: 0, columns: 1, rows: 2.5),
     LevelObject(type: LevelObjectType.platform, column: 84.5, row: 0, columns: 1, rows: 3),
 
