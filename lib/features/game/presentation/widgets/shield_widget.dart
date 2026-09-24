@@ -66,21 +66,32 @@ class ShieldWidget extends PositionComponent with CollisionCallbacks {
   void render(Canvas canvas) {
     final shield = _shieldPath();
 
+    // Soft colored aura (pickup readability)
     canvas.drawPath(
       shield,
       Paint()
         ..color = game.palette.shieldGlow
-        ..maskFilter = const MaskFilter.blur(
-          BlurStyle.normal,
-          12,
-        ),
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10),
     );
 
+    // Drop shadow behind the body
+    canvas.save();
+    canvas.translate(1.5, 2.5);
+    canvas.drawPath(
+      shield,
+      Paint()
+        ..color = Colors.black.withValues(alpha: 0.35)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4),
+    );
+    canvas.restore();
+
+    // Body fill
     canvas.drawPath(
       shield,
       Paint()..color = game.palette.shield,
     );
 
+    // Left highlight facet
     final highlight = Path()
       ..moveTo(size.x * 0.5, size.y * 0.08)
       ..cubicTo(
@@ -111,23 +122,26 @@ class ShieldWidget extends PositionComponent with CollisionCallbacks {
 
     canvas.drawPath(
       highlight,
-      Paint()..color = Colors.white.withValues(alpha: 0.35),
+      Paint()..color = Colors.white.withValues(alpha: 0.32),
     );
 
+    // Center ridge (detail, no blur)
+    canvas.drawLine(
+      Offset(size.x * 0.5, size.y * 0.14),
+      Offset(size.x * 0.5, size.y * 0.72),
+      Paint()
+        ..color = Colors.white.withValues(alpha: 0.45)
+        ..strokeWidth = 1.4
+        ..strokeCap = StrokeCap.round,
+    );
+
+    // Single crisp outline
     canvas.drawPath(
       shield,
       Paint()
-        ..color = Colors.black.withValues(alpha: 0.55)
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 2,
-    );
-
-    canvas.drawLine(
-      Offset(size.x * 0.5, size.y * 0.12),
-      Offset(size.x * 0.5, size.y * 0.78),
-      Paint()
-        ..color = Colors.white.withValues(alpha: 0.4)
-        ..strokeWidth = 1.5,
+        ..strokeWidth = 2
+        ..color = Colors.black.withValues(alpha: 0.75),
     );
   }
 
